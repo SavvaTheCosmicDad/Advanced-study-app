@@ -79,13 +79,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     setClock('.timer', deadline);
 
-    //Modal
+    // Modal
 
     const modalTrigger = document.querySelectorAll('[data-modal]'),
         modal = document.querySelector('.modal'),
         modalClose = document.querySelector('[data-close]');
 
-        console.log(modalTrigger, modal, modalClose);
+    console.log(modalTrigger, modal, modalClose);
 
     function openModal() {
         modal.classList.add('show');
@@ -132,4 +132,42 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
     window.addEventListener('scroll', showModalByScroll);
+
+    // Classes
+
+    const cardItem = document.querySelectorAll('.menu__item'),
+        cardWrapper = document.querySelector('[data-wrapper]');
+
+    cardItem.forEach(item => {
+        item.remove();
+    });
+
+    class Card {
+        constructor(title, descr, cost) {
+            this.title = title;
+            this.descr = descr;
+            this.cost = cost;
+        }
+
+        render() {
+            const cardCreateElement = document.createElement('div');
+
+            cardCreateElement.innerHTML = `<div class="menu__item"> <img src = "img/tabs/vegy.jpg" alt = "vegy" ><h3 class="menu__item-subtitle">${this.title}</h3> <div class="menu__item-descr">${this.descr}</div> <div class="menu__item-divider"></div> <div class="menu__item-price"> <div class="menu__item-cost">Цена:</div> <div class="menu__item-total"><span>${this.cost}</span> грн/день</div> </div>`;
+
+            cardWrapper.append(cardCreateElement);
+
+        }
+    }
+
+    new Card('Меню "Фитнес"',
+        'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
+        283).render();
+
+    new Card('Меню "Фитнес"',
+        'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
+        283).render();
+
+    new Card('Меню "Фитнес"',
+        'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
+        283).render();
 });
