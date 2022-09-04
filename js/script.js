@@ -170,4 +170,53 @@ document.addEventListener("DOMContentLoaded", () => {
     new Card('Меню "Фитнес"',
         'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
         283).render();
+
+    // Slider
+
+    const sliderImg = document.querySelectorAll('.offer__slide')
+          sliderPrev = document.querySelector('.offer__slider-prev'),
+          sliderNext = document.querySelector('.offer__slider-next'),
+          sliderCurremt = document.querySelector('#current'),
+          sliderTotal = document.querySelector('#total');
+    let index = 1;
+
+    if (sliderImg.length < 10) {
+        sliderTotal.textContent = `0${sliderImg.length}`;
+    } else {
+        sliderTotal.textContent = sliderImg.length;
+    }
+
+    function showSliderContent(n) {
+        if (n > sliderImg.length) {
+            index = 1;
+        }
+
+        if (n < 1) {
+            index = sliderImg.length;
+        }
+
+        if (sliderImg.length < 10) {
+            sliderCurremt.textContent = `0${index}`;
+        } else {
+            sliderCurremt.textContent = index;
+        }
+
+        sliderImg.forEach(item => {
+            item.style.display = 'none';
+        });
+        sliderImg[index - 1].style.display = 'block';
+    }
+    showSliderContent(index);
+
+    function plusSlide(n) {
+        showSliderContent(index += n);
+    }
+
+    sliderNext.addEventListener('click', () => {
+        plusSlide(1);
+    });
+
+    sliderPrev.addEventListener('click', () => {
+        plusSlide(-1);
+    });
 });
